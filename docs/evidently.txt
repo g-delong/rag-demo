@@ -1,0 +1,43 @@
+Core Concepts
+This is an explanatory page to describe the key features and concepts at Evidently.
+
+TL;DR
+Evidently helps evaluate, test and monitor ML models in production.
+
+A Metric is a core component of Evidently. You can combine multiple Metrics in a Report. Reports are best for visual analysis and debugging of your models and data.
+
+A Test is a metric with a condition. Each test returns a pass or fail result. You can combine multiple Tests in a Test Suite. Test Suites are best for automated model checks as part of an ML pipeline.
+
+For both Tests and Metrics, Evidently has Presets. These are pre-built combinations of metrics or checks that fit a specific use case.
+
+A Snapshot is a JSON version of the Report or a Test Suite which contains measurements and test results for a specific period. You can log them over time and run an Evidently Monitoring Dashboard for continuous monitoring.
+
+Metrics and Reports
+What is a Metric?
+A Metric is a component that evaluates a specific aspect of the data or model quality.
+
+A Metric can be, literally, a single metric (for example, DatasetMissingValuesMetric() returns the share of missing features). It can also be a combination of metrics (for example, DatasetSummaryMetric() calculates various descriptive statistics for the dataset). Metrics exist on the dataset level and on the column level.
+
+Each Metric has a visual render. Some visualizations simply return the values:
+
+
+RegressionQualityMetric
+Others have rich visualizations. Here is an example of a dataset-level Metric that evaluates the error of a regression model:
+
+
+RegressionErrorDistribution
+Here is an example of a column-level Metric that evaluates the value range of certain feature:
+
+
+ColumnValueRangeMetric
+Evidently contains 35+ Metrics (with 100+ different measurements) related to data quality, integrity, drift and model performance. You can also implement a custom one.
+
+What is a Report?
+A Report is a combination of different Metrics that evaluate data or ML model quality.
+
+Уou can display an interactive report inside a Jupyter notebook or export it as an HTML file:
+
+
+Data Drift report example
+The Report output is also available as JSON or Python dictionary. This "text" version returns any new calculated values and, optionally, some other useful information such as histogram bins. You can also define what to include. Example:
+
